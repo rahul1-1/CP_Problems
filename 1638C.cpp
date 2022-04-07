@@ -100,44 +100,62 @@ bool prime(ll m)
  
 void solve()
 {
-int n;
-cin>>n;
-vector<int>arr(n);
-for(int i=0;i<n;i++)
+ ll n;
+ cin>>n;
+ vector<ll> arr(n);
+ for(int i=0;i<n;i++)
+ {
+ 	cin>>arr[i];
+ }
+ stack<pair<ll,ll>>st;
+ st.push({arr[0],arr[0]});
+ 
+ for(int i=1;i<n;i++)
+ {
+ 	if(arr[i]<st.top().F ||arr[i]<st.top().S)
+ 	{
+ 		auto temp=st.top();
+ 		st.pop();
+ 		temp.F=max(temp.F,arr[i]);
+ 		temp.S=min(temp.S,arr[i]);
+ 		st.push(temp);
+ 	}
+ 	else{
+ 		st.push({arr[i],arr[i]});
+ 	}
+ 	
+ 	
+ }
+ 
+
+ ll cnt =0;
+
+ 
+ 
+//d1();
+
+while(st.size()>1)
 {
-	cin>>arr[i];
-}
-int sum;
-bool fl=false;
-int sz=((1<<n)-1);
-for(int i=0;i<=sz ;i++)
-{
-	sum=0;
-	for(int j=0;j<n;j++)
+	auto temp=st.top();
+	st.pop();
+	if( temp.F<st.top().F || temp.S < st.top().F )
 	{
-		if(i&(1<<j))
-		{
-			sum+=arr[j];
-		}else{
-			sum-=arr[j];
-		}
+		auto t=st.top();
+		st.pop();
+		t.F=max(temp.F,t.F);
+		t.S=min(temp.S,t.S);
+		st.push(t);
+		
 	}
-	if(sum%360==0)
-	{
-		fl=true;
+	else{
+		
+		cnt++;
 	}
-	if(fl==true)
-	{
-		d1("YES");
-		return;
-	}
+	
+
 }
-if(fl==true)
-{
-	d1("YES");
-		return;
-}
-d1("NO");
+d1(cnt+st.size());
+
 return  ;
 }
 int32_t main(){
@@ -147,7 +165,7 @@ ios_base::sync_with_stdio(false);
 //cout << fixed << setprecision(9);
 
    ll T=1;
-  // cin>>T;
+   cin>>T;
    while(T--)
    {
       solve(); 

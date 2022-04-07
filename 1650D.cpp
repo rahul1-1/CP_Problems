@@ -97,34 +97,42 @@ bool prime(ll m)
     
     return true;
 }
+
  
 void solve()
 {
-	ll n;
-	cin>>n;
-	vector<ll>arr(n+1);
-	arr[0]=0;
-	 ll ans=0;
-	 ll cnt=0;
-	for(int i=1;i<=n;i++)
-	{
-		cin>>arr[i];
-		
-	}
-	for(int i=0;i<n;i++)
-	{
-		
-		cnt+=arr[i]-arr[i+1];
-		if(cnt<0)
-		{
-			ans+=abs(cnt);
-			cnt=0;
-		}
-	}
 
-d1(ans);
-
-return  ;
+ int n;
+        cin >> n;
+ 
+        vector<int> pos(n + 1, 0);
+        vector<int> d(n + 1, 0);
+ 
+        auto rotate = [&](int x, int y)->void{
+            for (int i = 1; i <= x; i++){
+                pos[i]--;
+                pos[i] = (pos[i] - y + x) % x;
+                pos[i]++;
+            }
+        };
+ 
+        for (int i = 1; i <= n; i++){
+            int a;
+            cin >> a;
+            pos[a] = i;
+        }
+        for (int i = n; i >= 1; i--){
+            d[i] = pos[i];
+            if (pos[i] == i){
+                d[i] = 0;
+            }
+            rotate(i, d[i]);
+        }
+ 
+        for (int i = 1; i <= n; i++){
+            cout << d[i] << ' ';
+        }
+        cout << '\n';
 }
 int32_t main(){
 ios_base::sync_with_stdio(false);
@@ -133,7 +141,7 @@ ios_base::sync_with_stdio(false);
 //cout << fixed << setprecision(9);
 
    ll T=1;
-  // cin>>T;
+   cin>>T;
    while(T--)
    {
       solve(); 

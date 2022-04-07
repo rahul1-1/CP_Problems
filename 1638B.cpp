@@ -100,35 +100,34 @@ bool prime(ll m)
  
 void solve()
 {
-	 ll a,b,c;
-	 cin>>a>>b>>c;
-	 ll gd=1;
-	 if(a==1&&b==1&&c==1)
-	 {
-	 	d2(1,1);
-	 	return ;
-	 }
-	 for(int i=0;i<c-1;i++)
-	 {
-	 	gd=gd*10;
-	 }
-	 ll num1=1;
-	 for(int i=0;i<a-1;i++)
-	 {
-	 	num1=num1*10;
-	 }
-	 ll num2=1;
-	 for(int i=0;i<b-c;i++)
-	 {
-	 	num2=num2*10 +1;
-	 }
-	 num2=num2*gd;
-	 
-	 
-	 d2(num1,num2);
 
+ll n;
+cin>>n;
+vll arr(n);
+vll a[2];
+for(int i=0;i<n;i++)
+{
+	cin>>arr[i];
+		a[arr[i]&1].push_back(arr[i]);
+}
+for(int i=1;i<a[1].size();++i)
+{
+	if(a[1][i]<a[1][i-1])
+	{
+		d1("No");
+		return;
+	}
+}
 
-return  ;
+for(int i=1;i<a[0].size();++i)
+{
+	if(a[0][i]<a[0][i-1])
+	{
+		d1("No");
+		return;
+	}
+}
+d1("Yes");
 }
 int32_t main(){
 ios_base::sync_with_stdio(false);

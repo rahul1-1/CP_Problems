@@ -101,28 +101,59 @@ bool prime(ll m)
 void solve()
 {
 
-    string s1,s2,res1="",res2="";
-    cin>>s1>>s2;
-    int n1=lth(s1);
-    int n2=lth(s2);
-    int l=lcm(n1,n2);
-    
-    for(int i=0;i<(l/n1);i++)
-    {
-        res1+=s1;
-    }
-    for(int i=0;i<(l/n2);i++)
-    {
-        res2+=s2;
-    }
-    
-    if(res1==res2)
-    {
-        d1(res1);
-    }else{
-        d1(-1);
-    }
+ll n;
+cin>>n;
+vll arr;
+set<ll>st;
+for (int i = 0; i < n; ++i)
+{
+	ll t;
+	cin>>t;
+	st.insert(t);
+}
+for(auto x:st)
+{
+	arr.push_back(x);
+}
+// sort(all(arr));
+ll mex=0;
+for(int i=0;i<n;i++)
+{
+	if(arr[i]!=mex)
+		break;
+	mex++;
+	
+}
 
+// cout<<" mex "<<mex<<endl;
+if(mex==0)
+{
+	d1(arr[0]-1);
+	return;
+}
+ if(mex==1)
+{
+	d1(-1);
+	return ;
+}
+ll ans=0;
+for(int i=0;i<arr.size();)
+{
+	int j=i+1;
+	ll cnt=1;
+	while(j<n&&arr[j]-arr[j-1]==1)
+	{
+		j++;
+		cnt++;
+	}
+	if(cnt>=(mex-1))
+	{
+		ans++;
+	}
+	i=j;
+}
+--ans;
+d1(ans);
 return  ;
 }
 int32_t main(){
@@ -132,7 +163,7 @@ ios_base::sync_with_stdio(false);
 //cout << fixed << setprecision(9);
 
    ll T=1;
-  cin>>T;
+   cin>>T;
    while(T--)
    {
       solve(); 

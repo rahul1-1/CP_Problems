@@ -103,25 +103,29 @@ void solve()
 
 ll n;
 cin>>n;
-ll sum=((n+1)*n)/2;
-if(n<=2 )
+vector<ll>arr(n);
+for(int i=0;i<n;i++)
 {
-	d1("No");
-	return ;
+	cin>>arr[i];
 }
-cout<<"Yes"<<endl;;
- ll esz=n/2;
- ll osz=n/2 +( n&1);
- cout<<"1 "<<osz<<endl;
- cout<<n-1<<" ";
- for(int i=1;i<=n;i++)
- {
- 	if(i!=osz)
- 	{
- 		cout<<i<<" ";
- 	}
- }
-cout<<endl;
+sort(all(arr));
+ll sumb=arr[0];
+ll sumr=0;
+ll l=1;
+ll r=n-1;
+while(l<r)
+{
+	sumb+=arr[l++];
+	sumr+=arr[r--];
+	if(sumr>sumb)
+	{
+		d1("Yes");
+		return;
+	}
+}
+
+d1("No");
+
 return  ;
 }
 int32_t main(){
@@ -131,7 +135,7 @@ ios_base::sync_with_stdio(false);
 //cout << fixed << setprecision(9);
 
    ll T=1;
-   //cin>>T;
+   cin>>T;
    while(T--)
    {
       solve(); 

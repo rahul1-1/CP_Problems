@@ -103,19 +103,41 @@ void solve()
 
 ll n;
 cin>>n;
-ll ans=2;
-if(n==1)
+vll arr(n);
+for(int i=0;i<n;i++)
 {
-	d1("2");
-	return;
+	cin>>arr[i];
 }
- ll k=2;
- while(n-- >1)
- {
- 	k*=2;
- 	ans+=k;
- }
- d1(ans);
+string col;
+cin>>col;
+
+vector<pair<char,ll>>p;
+for(int i=0;i<n;i++)
+{
+	char ch=col[i];
+	// if(arr[i]<0)
+	// {
+	// 	if(col[i]=='R')
+	// 	arr[i]=1;
+	// }
+	p.push_back({ch,arr[i]});
+}
+sort(all(p));
+
+for(int i=0;i<n;i++)
+{
+	if(p[i].S >(i+1) && p[i].F=='R')
+		{
+			d1("NO");
+		return;
+	}
+	if(p[i].S<(i+1) && p[i].F=='B')
+	{
+		d1("NO");
+		return;
+	}
+}
+d1("YES");
 return  ;
 }
 int32_t main(){

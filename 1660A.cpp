@@ -101,20 +101,16 @@ bool prime(ll m)
 void solve()
 {
 
-ll n,k;
-cin>>n>>k;
-ll ans=0;
-ll j=1;
-for(int i=0;i<32;i++)
+ll a,b;
+cin>>a>>b;
+if(a==0)
 {
-	if(k & (1<<i))
-	{
-		ans=(ans+j)%mod;
-	}
-	j*=n;
-	j%=mod;
+	d1(1);
+	return ;
 }
-d1(ans);
+else{
+	d1(a + 2*b +1);
+}
 
 return  ;
 }

@@ -101,28 +101,84 @@ bool prime(ll m)
 void solve()
 {
 
-	ll n; cin >> n;
-    vll a(n);
-    for (ll i = 0; i < n; i++) {
-        cin >> a[i];
-    }
-    sort(a.begin(), a.end());
-    swap(a[n - 1], a[n - 2]);
-    if (a[0] >= a[n - 1] + a[1] || a[n - 1] >= a[n - 2] + a[0]) {
-        cout << "NO" << endl;
-        return;
-    }
-    for (ll i = 1; i < n - 1; i++) {
-        if (a[i] >= a[i - 1] + a[i + 1]) {
-            cout << "NO" << endl;
-            return;
-        }
-    }
-    cout << "YES" << endl;
-    for (ll i = 0; i < n; i++) {
-        cout << a[i] << ' ';
-    }
-    cout << endl;
+ll n,m;
+cin>>n>>m;
+ll sum=n+m;
+vll arr;
+if(sum%2==0)
+{
+	if(n&1==1)
+	{
+		
+		ll x=(n+1)/2;
+		ll y=(m+1)/2;
+		ll d=abs(n-x)+(m-y);
+	
+	for(int i=1;i<=n;i++)
+	{
+		for(int j=1;j<=m;j++)
+		{
+			ll nd=d+abs(x-i)+abs(y-j);
+			arr.pb(nd);
+		}
+	}
+	}
+	else{
+	
+		ll x=(n+1)/2;
+		ll y=(m+1)/2;
+		ll d=abs(n-x)+(m-y);
+		for(int i=1;i<=n;i++)
+	{
+		for(int j=1;j<=m;j++)
+		{
+			ll mn=abs(x-i)+abs(y-j);
+			mn=min(mn,abs(x+1-i)+abs(y-j));
+			mn=min(mn,abs(x-i)+abs(y+1-j));
+			mn=min(mn,abs(x+1-i)+abs(y+1-j));
+			ll nd=d+mn;
+			arr.pb(nd);
+		}
+	}
+	}
+}else{
+	if(n&1)
+	{
+				ll x=(n+1)/2;
+		ll y=(m+1)/2;
+		ll d=abs(n-x)+(m-y);
+		for(int i=1;i<=n;i++)
+	{
+		for(int j=1;j<=m;j++)
+		{
+			ll mn=abs(x-i)+abs(y-j);
+			mn=min(mn,abs(x-i)+abs(y+1-j));
+			ll nd=d+mn;
+			arr.pb(nd);
+		}
+	}
+	}else{
+		
+		ll x=(n+1)/2;
+		ll y=(m+1)/2;
+		ll d=abs(n-x)+(m-y);
+		for(int i=1;i<=n;i++)
+	{
+		for(int j=1;j<=m;j++)
+		{
+			ll mn=abs(x-i)+abs(y-j);
+			mn=min(mn,abs(x+1-i)+abs(y-j));
+			ll nd=d+mn;
+			arr.pb(nd);
+		}
+	}
+	}
+}
+sort(all(arr));
+for(auto &x:arr)
+{
+	cout<<x<<" ";
+}cout<<endl;
 return  ;
 }
 int32_t main(){
@@ -132,7 +188,7 @@ ios_base::sync_with_stdio(false);
 //cout << fixed << setprecision(9);
 
    ll T=1;
-  // cin>>T;
+   cin>>T;
    while(T--)
    {
       solve(); 

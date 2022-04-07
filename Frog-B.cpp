@@ -97,33 +97,51 @@ bool prime(ll m)
     
     return true;
 }
- 
+ ll sol(vector<ll>&arr,ll n,ll k,ll ind,vector<ll>&dp)
+ {
+   if(ind==0)
+     return 0;
+   if(dp[ind]!=-1)
+     return dp[ind];
+   int op1=INT_MAX;
+   for(int j=1;j<=k;j++)
+   {
+   	if(ind-j>=0)
+    {
+      int curr=abs(arr[ind]-arr[ind-j])+sol(arr,n,k,ind-j,dp);
+      op1=min(op1,curr);
+    }
+   }
+   return dp[ind]=op1;
+ }
 void solve()
 {
 
-	ll n,k;
-	cin>>n>>k;
-	
-	for(int i=1;i<k;i++)
-	{
-		ll temp=n;
-		ll mn=INT_MAX;
-		ll mx=INT_MIN;
-		while(n>0)
-		{
-			ll rem=n%10;
-			mn=min(rem,mn);
-			mx=max(rem,mx);
-			n/=10;
-		}
-		n=temp + mn*mx;
-	
-		if(mn==0)
-		{
-			break;
-		}
-	}
-	d1(n);
+ll n,k;
+  cin>>n>>k;
+  vll arr(n);
+  for(int i=0;i<n;i++)
+  {
+    cin>>arr[i];
+  }
+  vector<ll>dp(n+1);
+  dp[0]=0;
+  for(int i=1;i<=n;i++)
+  {
+    ll curr=INT_MAX;
+    for(int j=1;j<=k;j++)
+    {
+      if(i-j>=0)
+      {
+         ll jump=abs(arr[i]-arr[i-j])+dp[i-j];
+          curr=min(curr,jump);
+      }
+    }
+    dp[i]=curr;
+  }
+  d1(dp[n-1]);
+ // ll ans=sol(arr,n,k,n-1,dp);
+   // d1(ans);
 
 return  ;
 }
@@ -134,7 +152,7 @@ ios_base::sync_with_stdio(false);
 //cout << fixed << setprecision(9);
 
    ll T=1;
-   cin>>T;
+   //cin>>T;
    while(T--)
    {
       solve(); 

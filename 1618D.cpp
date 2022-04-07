@@ -100,10 +100,28 @@ bool prime(ll m)
  
 void solve()
 {
-int n;
-cin>>n;
-cout<<" yyy "<<n;
 
+ll n,k;
+cin>>n>>k;
+vll arr(n);
+for (int i = 0; i < n; ++i)
+{
+	cin>>arr[i];
+}
+sort(all(arr));
+int j=n-1;
+int i=j-k;
+ll sum=0;
+while(k > 0)
+{
+	sum+=arr[i--]/arr[j--];
+	k--;
+}
+while(i>=0)
+{
+	sum+=arr[i--];
+}
+d1(sum);
 
 return  ;
 }
@@ -114,7 +132,7 @@ ios_base::sync_with_stdio(false);
 //cout << fixed << setprecision(9);
 
    ll T=1;
-  // cin>>T;
+   cin>>T;
    while(T--)
    {
       solve(); 

@@ -101,22 +101,45 @@ bool prime(ll m)
 void solve()
 {
 
-ll n,k;
-cin>>n>>k;
-if(k==1)
+ll n;
+cin>>n;
+vll arr(n,0);
+for(int i=0;i<n;i++)
 {
-	d1(n);
-	return ;
+	cin>>arr[i];
 }
-ll ans=0;
-while(n)
-{
-	n/=2;
-	ans=ans<<1;
-	ans|=1;
-}
-d1(ans);
 
+
+bool f =false;
+while(!f)
+{
+	vll temp;
+
+	f=true;
+	for(int i=0;i<arr.size();i++)
+	{
+		if((i%2!=0 && arr[i]%(i+2)==0)||i%2==0)
+		{
+			temp.push_back(arr[i]);
+		}
+		if(arr[i]%2==0)
+		{
+			f=false;
+		}
+		
+	}
+	arr=temp;
+}
+
+for(int i=0;i<arr.size();i++)
+{
+	if(arr[i]%(2)==0)
+	{
+		cout<<"NO"<<endl;
+		return ;
+	}
+}
+d1("YES");
 return  ;
 }
 int32_t main(){
@@ -126,7 +149,7 @@ ios_base::sync_with_stdio(false);
 //cout << fixed << setprecision(9);
 
    ll T=1;
-  // cin>>T;
+   cin>>T;
    while(T--)
    {
       solve(); 
